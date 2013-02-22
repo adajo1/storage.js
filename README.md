@@ -1,7 +1,7 @@
 easydb.js
 =========
 
-easydb.js is a free and open source JavaScript library for HTML5 database management. Using syntax and methods similar to SQL.
+easydb.js is a free and open source JavaScript class for HTML5 database management. Using syntax and methods similar to SQL.
 
 This is a client database storage and can only be used within your browser.
 
