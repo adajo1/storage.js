@@ -97,3 +97,9 @@ Possible Future Work
 * Store each database into the web storage individually for faster performance and loading times. Possible tables also.
 * More operators: !=, *=, etc.
 * Support json for server-side?
+
+Limitations
+=========
+
+* Only works with HTML5 browsers.
+* Cannot contain lots of data. Size is limited.
