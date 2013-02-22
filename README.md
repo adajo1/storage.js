@@ -90,3 +90,9 @@ if(db.table("accounts").empty()) {
   // returns true or false
 }
 ```
+
+Possible Future Work
+=========
+
+* Store each database into the web storage individually for faster performance and loading times. Possible tables also.
+* More operators: !=, *=, etc.
