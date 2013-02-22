@@ -104,3 +104,8 @@ Limitations
 * Only works with HTML5 browsers.
 * Cannot contain lots of data. Size is limited.
 * The limitations with web storage.
+
+Browser Support
+=========
+
+Firefox 3.5+, Chrome 2+, Safari 4+ and MSIE 8+.
