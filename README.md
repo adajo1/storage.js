@@ -52,7 +52,7 @@ Retrieving records:
 
 ```javascript
 var results = db.table("accounts").get("*").where({ name: "Adam" }).execute();
-var results = db.table("accounts").get("*").where({ name: "Adam" }).execute();
+var results = db.table("accounts").get("*").where({ name: "Adam", money: 30 }).execute();
 var results = db.table("accounts").get("*").limit(10).orderby("name").execute();
 var results = db.table("accounts").get("name").execute();
 ```
