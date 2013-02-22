@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+    <head>
+		<title>easydb.js</title>
+		<script type="text/javascript" src="library/easydb.js"></script>
+		<script>
+			// connect to the database (local || session)
+			var conn = easydb.connect("local");
+			if(!conn) {
+				// connection unsuccessful
+				console.log("Cannot connect to HTML5 Storage, upgrade your browser to support it.");
+			}
+			if(!easydb.database("zendos")) {
+				// database does not exist, create it
+				easydb.create("database", "zendos");
+			}
+			// open the database
+			var db = easydb.database("zendos");
+			if(!db.table("accounts")) {
+				// table does not exist, create it
+				db.create("table", 'accounts');
+			}
+			// check if table is empty
+			if(db.table("accounts").empty()) {
+				// insert people into accounts
+				db.table("accounts").insert({ id: "auto", name: "Adam", money: 30, gender: "Male" }).execute();
+				db.table("accounts").insert({ id: "auto", name: "Bob", money: 235, gender: "Male" }).execute();
+				db.table("accounts").insert({ id: "auto", name: "Jane", money: 88, gender: "Female" }).execute();
+				db.table("accounts").insert({ id: "auto", name: "Dave", money: 500, gender: "Male" }).execute();
+				db.table("accounts").insert({ id: "auto", name: "Colin", money: 1, gender: "Male" }).execute();
+				db.table("accounts").insert({ id: "auto", name: "Glenn", money: 1000, gender: "Female" }).execute();
+				db.table("accounts").insert({ id: "auto", name: "Joel", money: 1000000000, gender: "Male" }).execute();
+			}
+			// EXAMPLES
+			// example: function to extract data from the accounts table and display in DIV
+			function generate() {
+				var accounts = db.table("accounts").get("*").orderby("name").execute();
+				var str = "<table border='1' cellpadding='5'><tr><td><b>ID</b></td><td><b>Name</b></td><td><b>Money</b></td><td><b>Gender</b></td></tr>"; 
+				for(var account in accounts){
+					str += '<tr><td>' + accounts[account].id + '</td><td>' + accounts[account].name + '</td><td>' + accounts[account].money + '</td><td>' + accounts[account].gender + '</td></tr>';
+				}
+				str += '</table>';
+				document.getElementById("content").innerHTML = str;
+			}
+			// example: function to insert data into the accounts table
+			function insert() {
+				var acc_name = prompt("Name:");
+				var acc_money = prompt("Money:");
+				var acc_gender = prompt("Gender:");
+				db.table("accounts").insert({ id: "auto", name: acc_name, money: acc_money, gender: acc_gender }).execute();
+				generate();
+			}
+			// example: function to delete data from the accounts table
+			function del() {
+				var acc_name = prompt("Name:");
+				db.table("accounts").del("*").where({ name: acc_name }).execute();
+				generate();				
+			}
+			// example: function to update data from the accounts table
+			function update() {
+				var acc_name = prompt("Name:");
+				var acc_money = prompt("Money:");
+				db.table("accounts").set({ money: acc_money }).where({ name: acc_name }).execute();
+				generate();				
+			}
+			// example: function to export the entire database as object
+			function exp() {
+				document.getElementById("content").innerHTML = JSON.stringify(db.export_db());
+			}
+		</script>
+	</head>
+	<body>
+		<center>
+			<h3>easydb.js</h3>
+			<button type="button" onclick="generate()">Display Accounts</button> 
+			<button type="button" onclick="insert()">Insert Record</button> 
+			<button type="button" onclick="del()">Delete Record</button> 
+			<button type="button" onclick="update()">Update Record</button> 
+			<button type="button" onclick="exp()">Export DB</button>
+			<br /><br />
+			<div id="content"></div>
+		</center>
+	</body>
+</html>
+	
