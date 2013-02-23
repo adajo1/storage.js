@@ -98,6 +98,12 @@ Possible Future Work
 * More operators: !=, *=, etc.
 * Support json for server-side?
 
+Benefits
+=========
+
+* Cache server-side data, such as account information. Reduce data coming from the server.
+* Easy to learn and use.
+
 Limitations
 =========
 
